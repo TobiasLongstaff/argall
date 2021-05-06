@@ -1,0 +1,232 @@
+/* NAV */
+
+.nav-menu
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.nav-agregar
+{
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1B9CFC;
+    color: white;
+    height: 150px;
+    padding: 20px 10px;
+    font-size: 16px;
+}
+
+/* CONTAINER */
+
+.container-principal
+{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.container-menu
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.25em;
+    text-align: center;
+    margin: 0 23px;
+    background-color: #D4D4D4
+}
+
+.container-pallet
+{
+    background-color: white;
+    border-radius: 10px;
+    position: absolute;
+    top: 80px;
+    margin: 0 25px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px #707070;
+    height: 240px;
+}
+
+.container-btn
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+    margin-top: 190px;
+}
+
+.container-info-pallets
+{
+    text-align: center;
+    margin-top: 25px;
+}
+
+.container-texto
+{
+    margin: 7px 0;
+}
+
+/* TEXTBOX */
+
+.textbox-login
+{
+    font-size: 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #dad8d8;
+    padding: 6px;
+    width: 70%;
+    outline: none;
+}
+
+.textbox-agregar
+{
+    border-radius: 5px;
+    padding: 5px;
+    border: 3px solid #61BCFF;
+    font-size: 20px;
+    width: 210px;
+    color: #7A7A7A;
+    text-align: center;
+    outline: none;
+}
+
+/* TEXTBOX ANIMACION */
+
+.textbox-login:active
+{
+    transform: scale(1.03);
+    transition: .2s ease;
+}
+
+.textbox-login:focus
+{
+    transition: .2s ease;
+    box-shadow: 0px 0px 10px 0px #18e18377;
+}
+
+/* TEXT */
+
+.text-pallets
+{
+    color: #1B9CFC;
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+}
+
+.text-codigo 
+{
+    color: #1B9CFC;
+    font-weight: bold;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.text-n-pallets
+{
+    position: absolute;
+    top: 205px;
+    left: 123px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* BOTONES */
+
+.btn-login
+{
+    font-size: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #18E183;
+    border: none;
+    text-transform: uppercase;
+    font-family: 'Roboto medium', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 50px;
+    width: 73%;
+    outline: none;
+}
+
+.btn-op
+{
+    background-color: #1B9CFC;
+    border: none;
+    color: white;
+    border-radius: 7px;
+    font-size: 25px;
+    width: 65px;
+    height: 60px;
+}
+
+.titulo-btn
+{
+    font-size: 15px;
+}
+
+.btn-cerrar
+{
+    color: #2C3A47;
+    font-size: 20px;
+}
+
+.btn-menu
+{
+    border: 1px solid #2C3A47;
+    border: none;
+    color: #2C3A47;
+    width: 135px;
+    height: 121px;
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Roboto medium', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* BOTONES ANIMACION*/
+
+.btn-login:hover:focus
+{
+    background-color: #88e6ba;
+    transition: .2s ease;
+}
+
+.btn-login:active
+{
+    transform: scale(1.05);
+    transition: .2s ease;
+}
+
+.btn-menu:active
+{
+    border-radius: 10px;
+    background-color: #1B9CFC;
+    color: white;
+    transition: .1s ease;
+    transform: scale(1.1);
+}
+
+/* OTROS */
+
+.box-pallets
+{
+    color: #1B9CFC;
+    font-size: 80px;
+}
+
+.titulo
+{
+    font-size: 25px;
+    text-transform: uppercase;
+    font-family: 'Roboto medium', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+.iconos
+{
+    font-size: 45px;
+    margin-bottom: 10px;
+}
