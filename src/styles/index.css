@@ -1,7 +1,15 @@
+:root
+{
+  --negro: #2C3A47;
+  --celeste: #1B9CFC;
+  --rojo: #FD7272;
+  --verde: #18E183;
+}
+
 body 
 {
   margin: 0;
   font-family: 'Roboto medium', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: white;
-  color: #2C3A47;
+  color: var(--negro);
 }
