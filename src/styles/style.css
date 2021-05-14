@@ -83,6 +83,19 @@
     margin-top: 30px;
 }
 
+.container-carga
+{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.conteiner-cargando
+{
+    margin-top: 90px;
+    text-align: center;
+}
+
 /* TEXTBOX */
 
 .textbox-login
@@ -91,7 +104,7 @@
     margin-top: 15px;
     border-radius: 5px;
     border: none;
-    background-color: var(--gris);
+    background-color: #ececec;
     padding: 6px;
     width: 70%;
     outline: none;
@@ -167,14 +180,20 @@
     text-transform: uppercase;
 }
 
-.text-n-pallets
+.text-n-cajas
 {
-    position: absolute;
-    top: 205px;
-    left: 123px;
     color: white;
     font-size: 30px;
     font-weight: bold;
+}
+
+.container-text-cajas
+{
+    width: 100px;
+    position: absolute;
+    top: 212px;
+    left: 83px;
+    text-align: center;
 }
 
 .text-elimianar
@@ -183,6 +202,13 @@
     font-weight: bold;
     text-transform: uppercase;
     font-size: 22px;
+}
+
+.text-carga
+{
+    font-size: 35px;
+    color: var(--verde);
+    font-weight: bold;
 }
 
 /* BOTONES */
@@ -269,6 +295,33 @@
     color: white;
     transition: .1s ease;
     transform: scale(1.1);
+}
+
+/* CARGA */
+
+.carga 
+{
+    width: 70px;
+    height: 70px;
+    border: 10px solid #eee;
+    border-top: 10px solid var(--verde);
+    border-radius: 50%;
+    animation-name: girar;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes girar 
+{
+    from 
+    {
+      transform: rotate(0deg);
+    }
+    to 
+    {
+      transform: rotate(360deg);
+    }
 }
 
 /* OTROS */

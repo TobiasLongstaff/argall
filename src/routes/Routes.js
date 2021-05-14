@@ -7,6 +7,7 @@ import Eliminar from '../pages/Eliminar';
 import AbrirPallets from '../pages/AbrirPallets';
 
 function Routes() {
+  
   return (
     <BrowserRouter>
         <Route exact path="/" component={Login}/>

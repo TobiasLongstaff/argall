@@ -9,6 +9,7 @@ class Login extends Component
     handleSubmit = e =>
     {
         cookies.set('IdSession', '1', {path: '/'});
+        cookies.set('User', 'Tobias Longstaff', {path: '/'});
         window.location.href='./menu';
         e.preventDefault();
     }
