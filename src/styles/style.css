@@ -274,6 +274,18 @@
     font-family: 'Roboto medium', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.btn-error-popup
+{
+    color: var(--rojo);
+    background-color: white;
+    width: 120px;
+    height:40px;
+    border-radius:5px;
+    border: none;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
 /* BOTONES ANIMACION*/
 
 .btn-login:hover:focus
@@ -295,6 +307,37 @@
     color: white;
     transition: .1s ease;
     transform: scale(1.1);
+}
+
+.btn-error-popup.active
+{
+    transition: .1s ease;
+    transform: scale(1.05);
+}
+
+/*POPUP*/
+
+.popup.active
+{
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup
+{
+    position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    text-align: center;
+    padding: 0 40px;
+	background: var(--rojo);
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: .3s ease all;
+    font-size: 15px;   
+    opacity: 0;
+    visibility: hidden; 
 }
 
 /* CARGA */
@@ -340,8 +383,22 @@
     font-weight: bold;
 }
 
+.titulo-error
+{
+    color: white;
+    font-size: 22px
+}
+
 .iconos
 {
     font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.icono-error
+{
+    margin-top: 90px;
+    font-size: 130px;
+    color: white;
     margin-bottom: 10px;
 }

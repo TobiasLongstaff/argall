@@ -2,24 +2,29 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import {Link} from 'react-router-dom';
 import '../styles/style.css';
-import axios from 'axios';
 
 const cookies = new Cookies();
 const url = 'https://localhost:44347/api/pallets';
+
 class Agregar extends Component 
 {
-    state = 
-    {
-        error: null,
-        isLoaded: false,
-        data:[],
-        from:
+    constructor(props){
+        super(props);
+        this.state = 
         {
-            idbulto: 0,
-            movimiento: '',
-            idpuesto: 0
+            form:
+            {
+                idbulto: '',
+                movimiento: cookies.get('User'),
+                idpuesto: '10'
+            },
+            infoPost:[],
+            error: null,
+            isLoaded: false,
+            data:[]
         }
-    }
+        this.handleChange = this.handleChange.bind(this);
+    }   
 
     async componentDidMount()
     {
@@ -36,44 +41,86 @@ class Agregar extends Component
 
     fetchExercises = async () => 
     {
-        let res = await fetch('https://localhost:44347/api/pallets')
+        let res = await fetch(url)
         let data = await res.json()
         this.setState(
         {
             isLoaded: true,
             data
-        })
+        });
     }
 
-    peticionPost=async()=>
-    {
-        await axios.post(url,this.state.from).then(response=>
+    handleChange(e) 
+    {               
+        this.setState(
         {
-            this.fetchExercises();
-        }).catch(error=>
-        {
-            console.log(error.message);
-        })
-    }
-
-    handelChange=async e=>
-    {
-        e.persist();
-        await this.setState(
-        {
-            from:
+            form:
             {
-                ...this.state.from,
+                ...this.state.form,
                 [e.target.name]: e.target.value
             }
+        }, () => 
+        {
+            // console.log(this.state.form) 
+            // console.log(e.target.value);   
+            this.peticionPost();
         });
-        console.log(this.state.from);
+    }
+
+    peticionPost= async () => 
+    {
+        try 
+        {
+            let config = 
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state.form)
+            }
+
+            let res = await fetch(url, config)
+            let infoPost = await res.json();
+            let observacion = infoPost.observacion;
+            this.setState(
+            {
+                isLoaded: true,
+                infoPost: observacion
+            });
+            console.log(infoPost)
+            var error = infoPost.error
+            if(error >= 100)
+            {
+                document.getElementById("popup").classList.add('active');
+            }
+            else
+            {
+
+            }
+        }
+        catch (error)
+        {
+            this.setState(
+            {
+                error
+            });
+        }
+    }
+
+    cerrar_popup=e=>
+    {
+        e.preventDefault();
+        document.getElementById("textbox-codigo-agregar").value = '';
+        document.getElementById("popup").classList.remove('active');
         
     }
 
     render() 
     {
-        const { isLoaded, data, from } = this.state;
+        const { isLoaded, data, infoPost } = this.state;
         if (!isLoaded) 
         {
             return(
@@ -85,12 +132,12 @@ class Agregar extends Component
                         <div className="carga"></div>                    
                     </div>                    
                 </div>
-
             );
         } 
         else 
         {
             return (
+                <>
                 <div>
                     <nav className="nav-agregar">
                         <label>Puesto: 10</label><br/>
@@ -106,9 +153,7 @@ class Agregar extends Component
                             <div className="container-texto">
                                 <label className="text-codigo-agregar">Codigo</label>
                             </div>
-                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" onChange={this.handelChange} value={from.idbulto}/>
-                            <input type="hidden" name="idpuesto" value={cookies.get('User')} onChange={this.handelChange}/>
-                            <input type="hidden" name="movimiento" value="tobias" onChange={this.handelChange}/>
+                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" value={this.state.value}  onChange={this.handleChange}/>
                             <div className="container-texto">
                                 {data.map(datos => (
                                     <label key="{data}" className="text-pallets-agregar">{datos.articulo}</label>   
@@ -123,7 +168,6 @@ class Agregar extends Component
                         </div>
                     </div>
                     <div className="container-btn">
-                        <button type="button" onClick={()=>this.peticionPost()}>Enviar</button>
                         <Link to="/menu">
                             <button className="btn-op-agregar" type="button">
                                 <i className="fas fa-chevron-left"></i>
@@ -132,6 +176,12 @@ class Agregar extends Component
                         <button className="btn-op-agregar" type="button"><i className="fas fa-box"></i></button>
                     </div>
                 </div>
+                <div className="popup" id="popup">
+                    <i className="fas fa-exclamation-circle icono-error"></i><br/>
+                    <label className="titulo-error">{infoPost}</label><br/>
+                    <button type="button" className="btn-error-popup" onClick={this.cerrar_popup}>Continuar</button>
+                </div>
+                </>
             );            
         }
     }   
