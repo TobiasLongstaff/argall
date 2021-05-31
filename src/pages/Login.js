@@ -10,6 +10,7 @@ class Login extends Component
     {
         cookies.set('IdSession', '1', {path: '/'});
         cookies.set('User', 'Tobias Longstaff', {path: '/'});
+        cookies.set('Puesto', '11', {path: '/'});
         window.location.href='./menu';
         e.preventDefault();
     }
@@ -30,6 +31,11 @@ class Login extends Component
                     <label className="titulo">Login</label><br/>
                     <input className="textbox-login" type="text" placeholder="Usuario"/><br/>
                     <input className="textbox-login" type="password" placeholder="Contraseña"/><br/>
+                    <label className="">Puesto:</label>
+                    <select className="textbox-puesto">
+                        <option>10</option>
+                        <option>11</option>
+                    </select>
                     <button className="btn-login" type="submit">Iniciar Sesión</button>
                 </form>
             </div>

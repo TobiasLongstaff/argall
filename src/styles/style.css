@@ -70,7 +70,7 @@
 .container-info-pallets
 {
     text-align: center;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
 .container-texto
@@ -97,6 +97,19 @@
 }
 
 /* TEXTBOX */
+
+.textbox-puesto
+{
+    font-size: 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ececec;
+    padding: 6px;
+    width: 60px;
+    outline: none;
+    margin-left: 5px;
+}
 
 .textbox-login
 {
@@ -136,13 +149,13 @@
 
 /* TEXTBOX ANIMACION */
 
-.textbox-login:active
+.textbox-login:active, .textbox-puesto:active
 {
     transform: scale(1.03);
     transition: .2s ease;
 }
 
-.textbox-login:focus
+.textbox-login:focus, .textbox-puesto:focus
 {
     transition: .2s ease;
     box-shadow: 0px 0px 10px 0px #18e18377;
@@ -191,7 +204,7 @@
 {
     width: 100px;
     position: absolute;
-    top: 212px;
+    top: 223px;
     left: 83px;
     text-align: center;
 }
@@ -332,12 +345,21 @@
 	right: 0;
     text-align: center;
     padding: 0 40px;
-	background: var(--rojo);
     font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: .3s ease all;
     font-size: 15px;   
     opacity: 0;
     visibility: hidden; 
+}
+
+#popup_error
+{
+	background-color: var(--rojo);
+}
+
+#popup_success
+{
+    background-color: var(--verde);
 }
 
 /* CARGA */
@@ -373,6 +395,9 @@
 {
     color: var(--celeste);
     font-size: 80px;
+    position: absolute;
+    left: 84px;
+    top: 190px;
 }
 
 .titulo
