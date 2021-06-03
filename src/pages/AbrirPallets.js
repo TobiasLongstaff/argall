@@ -4,10 +4,22 @@ import {Link} from 'react-router-dom';
 import '../styles/style.css';
 
 const cookies = new Cookies();
+const url = 'https://localhost:44347/api/pallets';
 
 class AbrirPallets extends Component 
 {
-    componentDidMount()
+    constructor(props)
+    {
+        super(props);
+        this.state = 
+        {
+            isLoaded: false,
+            data:[],
+            puesto: cookies.get('Puesto')
+        }
+    }
+
+    async componentDidMount()
     {
         if(!cookies.get('IdSession'))
         {
@@ -15,42 +27,79 @@ class AbrirPallets extends Component
         }
         else
         {
-            document.getElementById("textbox-codigo-agregar").focus();
+            await this.fetchExercises()
         }
+    }
+
+    fetchExercises = async () => 
+    {
+        let res = await fetch(url);
+        let data = await res.json();
+
+        this.setState(
+        {
+            isLoaded: true,
+            data: data
+        }, () => 
+        {
+            console.log(this.state.data)
+            console.log(data)
+            console.log('Carga...');
+        });
+    }
+
+    ir_pallet = () => 
+    {
+
     }
 
     render() 
     {
-        return (
-            <div>
-                <nav className="nav-agregar">
-                    <label>Puesto: 10</label><br/>
-                    <label>Movimiento: Tobias Longstaff</label>
-                </nav>
-                <div className="container-pallet">
-                    <label className="text-pallets-agregar">Nº Pallet: 45</label>
-                    <div className="container-info-pallets">
-                        <div className="container-texto">
-                            <label className="text-codigo-agregar">Codigo</label>
-                        </div>
-                        <input id="textbox-codigo-agregar" className="textbox-agregar" type="text"/>
-                        <div className="container-texto">
-                            <label className="text-pallets-agregar">LENGUA S/EPITELIO</label>                            
-                        </div>
-                        <i className="box-pallets-agregar fas fa-box-open"></i><br/>
-                        <label className="text-n-pallets">4</label>                        
-                    </div>
+        const { isLoaded, data, puesto } = this.state;
+        if (!isLoaded) 
+        {
+            return(
+                <div>
+                    <div className="conteiner-cargando">
+                        <label className="text-carga">Cargando</label>
+                    </div>                         
+                    <div className="container-carga">     
+                        <div className="carga"></div>                    
+                    </div>                    
                 </div>
-                <div className="container-btn">
+            );
+        } 
+        else
+        {
+            return (
+                <div className="container-app">
+                    <nav className="nav-abrir-pallet">
+                        <label>Puesto: {cookies.get('Puesto')}</label><br/>
+                        <label>Movimiento: {cookies.get('User')}</label>
+                    </nav>
+                    
+                    <div className="container-palletes-ver-pallet">
+                    {data.filter(puestos => puestos.puesto === puesto).map(datos => (
+                        <button fila={datos.pallet} className="container-pallet-abierto" onClick={this.ir_pallet}>
+                            <label key="{pallet}" className="text-pallets-agregar">{datos.pallet}</label>
+                            <label key="{articulo}" className="text-pallets-agregar">{datos.articulo}</label>
+                            <div className="container-n-caja">
+                                <i className="box-ver-pallet fas fa-box-open"></i> 
+                                <div className="container-carga-ver-pallet">
+                                    <label key="{caja}" className="text-n-cajas-ver-pallet">{datos.caja}</label>                            
+                                </div>                            
+                            </div>                        
+                        </button>
+                    ))}
+                    </div>
                     <Link to="/menu">
-                        <button className="btn-op-agregar" type="button">
+                        <button className="btn-op-ver-pallet" type="button">
                             <i className="fas fa-chevron-left"></i>
                         </button>
                     </Link>
-                    <button className="btn-op-agregar" type="button"><i className="fas fa-box"></i></button>
                 </div>
-            </div>
-        );
+            );            
+        }
     }
 }
 

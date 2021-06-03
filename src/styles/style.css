@@ -9,7 +9,7 @@
     margin-bottom: 20px;
 }
 
-.nav-agregar
+.nav-agregar, .nav-abrir-pallet
 {
     font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--celeste);
@@ -17,6 +17,11 @@
     height: 150px;
     padding: 20px 10px;
     font-size: 16px;
+}
+
+.nav-abrir-pallet
+{
+    height: 40px;
 }
 
 .nav-eliminar
@@ -90,10 +95,54 @@
     justify-content: center;
 }
 
+.container-carga-ver-pallet
+{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: -31px;
+    top: 5px;
+}
+
 .conteiner-cargando
 {
     margin-top: 90px;
     text-align: center;
+}
+
+.container-app
+{
+    background-color: var(--celeste);
+    height: 460px;
+}
+
+.container-pallet-abierto
+{
+    height: 65px;
+    width: 84%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #707070;
+    background-color: white;
+    margin: 0 8%;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+
+.container-palletes-ver-pallet
+{
+    height: 280px;
+    overflow: auto;
+}
+
+.container-n-caja
+{
+    display: flex;
+    align-items: center;
 }
 
 /* TEXTBOX */
@@ -200,6 +249,13 @@
     font-weight: bold;
 }
 
+.text-n-cajas-ver-pallet
+{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .container-text-cajas
 {
     width: 100px;
@@ -252,6 +308,18 @@
     height: 60px;
 }
 
+.btn-op-ver-pallet
+{
+    margin-top: 20px;
+    margin-left: 10px;
+    background-color: white;
+    border: none;
+    color: var(--celeste);
+    border-radius: 7px;
+    font-size: 25px;
+    width: 65px;
+    height: 60px;
+}
 
 .btn-op-eliminar
 {
@@ -322,7 +390,7 @@
     transform: scale(1.1);
 }
 
-.btn-error-popup.active
+.btn-error-popup.active, .btn-op-agregar:active, .btn-op-ver-pallet:active, .container-pallet-abierto:active
 {
     transition: .1s ease;
     transform: scale(1.05);
@@ -398,6 +466,13 @@
     position: absolute;
     left: 84px;
     top: 190px;
+}
+
+.box-ver-pallet
+{
+    color: var(--celeste);
+    font-size: 40px;
+
 }
 
 .titulo

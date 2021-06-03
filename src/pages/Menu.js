@@ -35,26 +35,26 @@ class Menu extends Component
                         <label className="titulo-btn">Agregar</label> 
                     </button>
                     </Link>
-                    <Link to="/eliminar"><button className="btn-menu">
+                    <Link to="/abrir-pallet"><button className="btn-menu">
+                        <i className="iconos fas fa-boxes"></i><br/>
+                        <label className="titulo-btn">Ver Pallets</label>
+                    </button>
+                    </Link>
+                    <Link to="/menu"><button className="btn-menu">
                         <i className="iconos fas fa-trash-alt"></i><br/>
                         <label className="titulo-btn">Eliminar</label>
                     </button>
                     </Link>
-                    <Link to="/abrir-pallet"><button className="btn-menu">
-                        <i className="iconos fas fa-boxes"></i><br/>
-                        <label className="titulo-btn">Abrir Pallet</label>
-                    </button>
-                    </Link>
-                    <Link to=""><button className="btn-menu">
+                    <Link to="/menu"><button className="btn-menu">
                         <i className="iconos fas fa-pallet"></i><br/>
                         <label className="titulo-btn">Agregar</label> 
                     </button>
                     </Link>
-                    <Link to=""><button className="btn-menu">
+                    <Link to="/menu"><button className="btn-menu">
                         <i className="iconos fas fa-pallet"></i><br/>
                         <label className="titulo-btn">Agregar</label> 
                     </button></Link>
-                    <Link to="/configuracion"><button className="btn-menu">
+                    <Link to="/menu"><button className="btn-menu">
                         <i className="iconos fas fa-cog"></i><br/>
                         <label className="titulo-btn">Config.</label> 
                     </button>

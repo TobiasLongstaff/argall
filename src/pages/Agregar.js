@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import Cookies from 'universal-cookie';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/style.css';
 
 const cookies = new Cookies();
@@ -9,13 +9,14 @@ const url = 'https://localhost:44347/api/pallets';
 
 class Agregar extends Component 
 {
-    constructor(props){
+    constructor(props)
+    {
         super(props);
         this.state = 
         {
             form:
             {
-                idbulto: cookies.get('idPallet'),
+                idbulto: '',
                 movimiento: cookies.get('User'),
                 idpuesto: cookies.get('Puesto')
             },
@@ -72,6 +73,8 @@ class Agregar extends Component
             }
         }
 
+        cookies.set('idpallet', pallet.toString(), {path: '/'});
+
         var idpallet = pallet.toString().substring(1);
 
         this.setState(
@@ -85,6 +88,29 @@ class Agregar extends Component
             }
         }, () => 
         {
+            console.log('Carga...');
+        });
+    }
+
+    obtener_caja = async () => 
+    {
+        let res = await fetch(url);
+        let data = await res.json();
+
+        var cant_cajas = data.filter(filas => filas.pallet === cookies.get('idpallet')).map(datos => datos.caja);
+        console.log(cant_cajas);
+
+        let fila = this.state.fila
+
+        fila[0].caja = cant_cajas.toString();
+
+        this.setState(
+        {
+            fila: fila
+
+        }, () => 
+        {
+            console.log(this.state.fila);
         });
     }
 
@@ -134,8 +160,8 @@ class Agregar extends Component
             {
                 // var creo_pallet = observacion.substring(0, 17)
                 // console.log(creo_pallet);
-
                 document.getElementById("popup_error").classList.add('active');
+                this.obtener_caja();
                 
             }
             else
@@ -172,7 +198,7 @@ class Agregar extends Component
                         {
                             document.getElementById("textbox-codigo-agregar").value = '';
                             document.getElementById("popup_success").classList.remove('active');
-                            this.fetchExercises()
+                            this.obtener_caja();
                         }, 2000
                     );                    
                 }
@@ -187,40 +213,56 @@ class Agregar extends Component
         }
     }
 
-    peticionPost_close= async () => 
+    peticionPost_close= () => 
     {
-        try 
+        Swal.fire(
         {
-            let config = 
+            title: '¿Cerrar pallet?',
+            text: "¿Estás seguro que queres cerrar el pallet?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Cerrar'
+        }).then((result) => 
+        {
+            if(result.isConfirmed) 
             {
-                method: 'POST',
-                headers: 
+                try 
+                {                    
+                    let config = 
+                    {
+                        method: 'POST',
+                        headers: 
+                        {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.state.form_close)
+                    }
+        
+                    let res = fetch(url, config);
+                    // console.log(res);
+                    console.log(this.state.form_close);
+                    let infoPost = res.json();
+                    console.log(infoPost);
+                }
+                catch (error)
                 {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state.form_close)
-            }
+                    this.setState(
+                    {
+                        error
+                    });
+                }
 
-            let res = await fetch(url, config);
-            console.log(res);
-            console.log(this.state.form_close);
-            let infoPost = await res.json();
-            let observacion = infoPost.observacion;
-            this.setState(
-            {
-                isLoaded: true,
-                infoPost: observacion
-            });
-            console.log(infoPost);
-        }
-        catch (error)
-        {
-            this.setState(
-            {
-                error
-            });
-        }
+                Swal.fire(
+                    '¡Pallet Cerrado!',
+                    'El pallet fue cerrado correctamente.',
+                    'success'
+                )
+                this.fetchExercises();
+            }
+        })
     }
 
     cerrar_popup_error=e=>
