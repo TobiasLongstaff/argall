@@ -12,6 +12,7 @@ function Routes() {
     <BrowserRouter>
         <Route exact path="/" component={Login}/>
         <Route exact path="/menu" component={Menu}/>
+        <Route path="/agregar/:idpallet" component={Agregar}/>
         <Route exact path="/agregar" component={Agregar}/>
         <Route exact path="/eliminar" component={Eliminar}/>
         <Route exact path="/abrir-pallet" component={AbrirPallets}/>

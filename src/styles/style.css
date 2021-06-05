@@ -119,18 +119,18 @@
 .container-pallet-abierto
 {
     height: 65px;
-    width: 84%;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #707070;
     background-color: white;
     margin: 0 8%;
     margin-top: 15px;
     margin-bottom: 7px;
-    border: none;
     display: flex;
     align-items: center;
     padding: 0 10px;
     justify-content: space-between;
+    text-decoration: none;
+    text-align: center;
 }
 
 .container-palletes-ver-pallet

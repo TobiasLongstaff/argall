@@ -48,11 +48,6 @@ class AbrirPallets extends Component
         });
     }
 
-    ir_pallet = () => 
-    {
-
-    }
-
     render() 
     {
         const { isLoaded, data, puesto } = this.state;
@@ -80,7 +75,7 @@ class AbrirPallets extends Component
                     
                     <div className="container-palletes-ver-pallet">
                     {data.filter(puestos => puestos.puesto === puesto).map(datos => (
-                        <button fila={datos.pallet} className="container-pallet-abierto" onClick={this.ir_pallet}>
+                        <a href={"agregar/"+datos.pallet} className="container-pallet-abierto">
                             <label key="{pallet}" className="text-pallets-agregar">{datos.pallet}</label>
                             <label key="{articulo}" className="text-pallets-agregar">{datos.articulo}</label>
                             <div className="container-n-caja">
@@ -89,7 +84,7 @@ class AbrirPallets extends Component
                                     <label key="{caja}" className="text-n-cajas-ver-pallet">{datos.caja}</label>                            
                                 </div>                            
                             </div>                        
-                        </button>
+                        </a>
                     ))}
                     </div>
                     <Link to="/menu">

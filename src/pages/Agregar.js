@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 import '../styles/style.css';
 
+
 const cookies = new Cookies();
 const url = 'https://localhost:44347/api/pallets';
 
@@ -29,7 +30,8 @@ class Agregar extends Component
             infoPost:[],
             error: null,
             isLoaded: false,
-            fila:[]
+            fila:[],
+            pallet: ''
         }
         this.handleChange = this.handleChange.bind(this);
     }   
@@ -42,8 +44,28 @@ class Agregar extends Component
         }
         else
         {
-            await this.fetchExercises()
-            document.getElementById("textbox-codigo-agregar").focus();
+            let url_actual = window.location.pathname;
+            url_actual = url_actual.substring(9);
+
+            if(url_actual !== '')
+            {
+                console.log(url_actual)
+                this.setState(
+                {
+                    pallet: url_actual
+                    
+                },() => 
+                {
+                    console.log(this.state.pallet) 
+                })
+                await this.fetchExercises_id()
+            }
+            else
+            {
+                await this.fetchExercises()
+                               
+            }
+            // document.getElementById("textbox-codigo-agregar").focus(); 
         }
     }
 
@@ -72,6 +94,33 @@ class Agregar extends Component
                 break;
             }
         }
+
+        cookies.set('idpallet', pallet.toString(), {path: '/'});
+
+        var idpallet = pallet.toString().substring(1);
+
+        this.setState(
+        {
+            isLoaded: true,
+            fila,
+            form_close:
+            {
+                ...this.state.form_close,
+                idpallet: idpallet
+            }
+        }, () => 
+        {
+            console.log('Carga...');
+        });
+    }
+
+    fetchExercises_id = async () => 
+    {
+        let res = await fetch(url);
+        let data = await res.json();
+        var fila = data.filter(pallet => pallet.pallet === this.state.pallet)
+        var pallet = this.state.pallet
+        console.log(fila);
 
         cookies.set('idpallet', pallet.toString(), {path: '/'});
 
