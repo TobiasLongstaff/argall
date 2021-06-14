@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/style.css';
+import Swal from 'sweetalert2'
 import Cookies from 'universal-cookie';
 import {Link} from 'react-router-dom';
 
@@ -15,9 +16,25 @@ class Menu extends Component
         }
     }
 
-    cerrar_sesion=()=>
+    cerrar_sesion(e)
     {
-        cookies.remove('IdSession', {path: '/'});
+
+        Swal.fire(
+        {
+            title: '¿Cerrar sesion?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Cerrar sesion'
+        }).then((result) => 
+        {
+            if(result.isConfirmed) 
+            {
+                cookies.remove('IdSession', {path: '/'});
+                window.location.href='./';        
+            }
+        })
     }
     
     render()
@@ -25,7 +42,7 @@ class Menu extends Component
         return(
             <div>
                 <nav className="nav-menu">
-                    <Link to='/' onClick={()=>this.cerrar_sesion()}><i className="btn-cerrar fas fa-times"></i></Link>
+                    <button className="btn-cerrar_sesion" onClick={()=>this.cerrar_sesion()}><i className="btn-cerrar fas fa-times"></i></button>
                     <label className="titulo">Menu</label> 
                     <label className="titulo">Id: {cookies.get('IdSession')}</label>                   
                 </nav>

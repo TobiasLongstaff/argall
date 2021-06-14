@@ -211,6 +211,10 @@
 }
 
 /* TEXT */
+.text-error-login
+{
+    color: var(--rojo)
+}
 
 .text-pallets-agregar
 {
@@ -281,6 +285,12 @@
 }
 
 /* BOTONES */
+
+.btn-cerrar_sesion
+{
+    background-color: transparent;
+    border: none;
+}
 
 .btn-login
 {
