@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import '../styles/style.css';
 
 const cookies = new Cookies();
-const url = 'https://localhost:44347/api/pallets';
+const url = 'https://192.168.101.3:5001/api/pallets';
 
 class AbrirPallets extends Component 
 {

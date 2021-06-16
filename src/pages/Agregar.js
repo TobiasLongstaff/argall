@@ -6,7 +6,7 @@ import '../styles/style.css';
 
 
 const cookies = new Cookies();
-const url = 'https://localhost:44347/api/pallets';
+const url = 'https://192.168.101.3:5001/api/pallets';
 
 class Agregar extends Component 
 {
@@ -65,7 +65,7 @@ class Agregar extends Component
                 await this.fetchExercises()
                                
             }
-            // document.getElementById("textbox-codigo-agregar").focus(); 
+            document.getElementById("textbox-codigo-agregar").focus(); 
         }
     }
 
@@ -319,6 +319,7 @@ class Agregar extends Component
         e.preventDefault();
         document.getElementById("textbox-codigo-agregar").value = '';
         document.getElementById("popup_error").classList.remove('active');
+        document.getElementById("textbox-codigo-agregar").focus(); 
     }
 
     render() 

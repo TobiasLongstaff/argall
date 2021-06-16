@@ -3,7 +3,7 @@ import '../styles/style.css';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-const url = 'https://localhost:44347/api/pallets';
+const url = 'https://192.168.101.3:5001/api/pallets';
 
 class Login extends Component
 {
