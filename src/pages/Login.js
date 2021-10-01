@@ -16,7 +16,7 @@ class Login extends Component
             {
                 idusuario: '',
                 password: '',
-                puesto: '10'
+                puesto: '80'
             },
             nombre: '',
             error: ''

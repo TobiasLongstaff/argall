@@ -151,7 +151,10 @@ class Agregar extends Component
 
         let fila = this.state.fila
 
-        fila[0].caja = cant_cajas.toString();
+        // if(cant_cajas === null)
+        // {
+            fila[0].caja = cant_cajas.toString();            
+        // }
 
         this.setState(
         {
@@ -357,7 +360,7 @@ class Agregar extends Component
                             <div className="container-texto">
                                 <label className="text-codigo-agregar">Codigo</label>
                             </div>
-                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" value={this.state.value}  onChange={this.handleChange}/>
+                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" autocomplete="off" value={this.state.value}  onChange={this.handleChange}/>
                             <div className="container-texto">
                                 {fila.map(datos => (
                                     <label key="{data}" className="text-pallets-agregar">{datos.articulo}</label>   
