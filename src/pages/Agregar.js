@@ -7,6 +7,7 @@ import '../styles/style.css';
 // import audioCorrecto from '../sounds/correcto.wav'; 
 
 const cookies = new Cookies();
+
 const url = 'http://192.168.1.206/API-Argall/api/pallets';
 
 class Agregar extends Component 
@@ -364,7 +365,7 @@ class Agregar extends Component
                             <div className="container-texto">
                                 <label className="text-codigo-agregar">Codigo</label>
                             </div>
-                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" value={this.state.value}  onChange={this.handleChange}/>
+                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" autocomplete="off" value={this.state.value}  onChange={this.handleChange}/>
                             <div className="container-texto">
                                 {fila.map(datos => (
                                     <label key="{data}" className="text-pallets-agregar">{datos.articulo}</label>   

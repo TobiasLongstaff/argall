@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import '../styles/style.css';
 
 const cookies = new Cookies();
+
 const url = 'http://192.168.1.206/API-Argall/api/pallets';
 
 class AbrirPallets extends Component 
