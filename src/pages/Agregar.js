@@ -3,17 +3,18 @@ import Swal from 'sweetalert2'
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 import '../styles/style.css';
-
+// import audioError from '../sounds/error.wav'; 
+// import audioCorrecto from '../sounds/correcto.wav'; 
 
 const cookies = new Cookies();
-const url = 'https://localhost:44347/api/pallets';
+const url = 'http://192.168.1.206/API-Argall/api/pallets';
 
 class Agregar extends Component 
 {
     constructor(props)
     {
         super(props);
-        this.state = 
+        this.state =
         {
             form:
             {
@@ -65,7 +66,7 @@ class Agregar extends Component
                 await this.fetchExercises()
                                
             }
-            // document.getElementById("textbox-codigo-agregar").focus(); 
+            document.getElementById("textbox-codigo-agregar").focus(); 
         }
     }
 
@@ -151,7 +152,10 @@ class Agregar extends Component
 
         let fila = this.state.fila
 
-        fila[0].caja = cant_cajas.toString();
+        // if(cant_cajas === null)
+        // {
+            fila[0].caja = cant_cajas.toString();   
+        // }
 
         this.setState(
         {
@@ -162,6 +166,14 @@ class Agregar extends Component
             console.log(this.state.fila);
         });
     }
+
+    // cerrar_popup_error=e=>
+    // {
+    //     e.preventDefault();
+    //     document.getElementById("textbox-codigo-agregar").value = '';
+    //     document.getElementById("popup_error").classList.remove('active');
+    //     document.getElementById("textbox-codigo-agregar").focus(); 
+    // }
 
     handleChange(e) 
     {               
@@ -176,90 +188,93 @@ class Agregar extends Component
         {
             console.log(this.state.form) 
             console.log(e.target.value);
-            this.peticionPost_save();
-        });
-    }
-
-    peticionPost_save= async () => 
-    {
-        try 
-        {
-            let config = 
+            var cant_caracters = e.target.value.length;
+            console.log(cant_caracters);
+            if(cant_caracters >= 6)
             {
-                method: 'POST',
-                headers: 
+                if(e.target.value.charAt(0) !== 'B')
                 {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.state.form)
-            }
-
-            let res = await fetch(url, config)
-            let infoPost = await res.json();
-            let observacion = infoPost.observacion;
-            this.setState(
-            {
-                isLoaded: true,
-                infoPost: observacion
-            });
-            console.log(infoPost)
-            var error = infoPost.error
-            if(error >= 100)
-            {
-                // var creo_pallet = observacion.substring(0, 17)
-                // console.log(creo_pallet);
-                document.getElementById("popup_error").classList.add('active');
-                this.obtener_caja();
-                
-            }
-            else
-            {
-                var creo_pallet = observacion.substring(0, 17)
-                console.log(creo_pallet);
-                if(creo_pallet === "Se creó el pallet")
-                {
-                    Swal.fire(
-                    {
-                        title: '¿Cambiar de pallet?',
-                        text: "Se creó un Nuevo pallet ¿deseas cambiar a ese pallet o seguir en este?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Cambiar de pallet'
-
-                    }).then((result) => 
-                    {
-                        document.getElementById("textbox-codigo-agregar").value = '';
-                        if(result.isConfirmed) 
-                        {
-                            this.fetchExercises();
-                            console.log('Cambio pallet');
-                        }
-                    })
+                    document.getElementById("textbox-codigo-agregar").value = '';
                 }
                 else
                 {
-                    document.getElementById("popup_success").classList.add('active');
-                    setTimeout(
-                        function cerrar_popup_success()
-                        {
-                            document.getElementById("textbox-codigo-agregar").value = '';
-                            document.getElementById("popup_success").classList.remove('active');
-                            this.obtener_caja();
-                        }, 2000
-                    );                    
-                }
+                    this.peticionPost_save();
+                }                
+            }
+        });
+    }
+
+    peticionPost_save = async () => 
+    {
+        let config = 
+        {
+            method: 'POST',
+            headers: 
+            {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state.form)
+        }
+
+        let res = await fetch(url, config)
+        let infoPost = await res.json();
+        let observacion = infoPost.observacion;
+        this.setState(
+        {
+            isLoaded: true,
+            infoPost: observacion
+        });
+        console.log(infoPost)
+        var error = infoPost.error
+        if(error === "0")
+        {
+            var creo_pallet = observacion.substring(0, 17)
+            if(creo_pallet === "Se creó el pallet")
+            {
+                console.log(creo_pallet);
+                Swal.fire(
+                {
+                    title: '¿Cambiar de pallet?',
+                    text: "Se creó un Nuevo pallet ¿deseas cambiar a ese pallet o seguir en este?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Cambiar de pallet'
+
+                }).then((result) => 
+                {
+                    document.getElementById("textbox-codigo-agregar").value = '';
+                    if(result.isConfirmed) 
+                    {
+                        this.fetchExercises();
+                        console.log('Cambio pallet');
+                    }
+                })
+            }
+            else
+            {
+                this.obtener_caja(); 
+                Swal.fire(
+                {
+                    icon: 'success',
+                    title: '¡Operación realizada correctamente!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })              
             }
         }
-        catch (error)
+        else
         {
-            this.setState(
-            {
-                error
-            });
+            Swal.fire(
+                'Error',
+                observacion,
+                'error'
+              )
         }
+        document.getElementById("textbox-codigo-agregar").value = '';
+        document.getElementById("textbox-codigo-agregar").focus(); 
     }
 
     peticionPost_close= () => 
@@ -314,16 +329,9 @@ class Agregar extends Component
         })
     }
 
-    cerrar_popup_error=e=>
-    {
-        e.preventDefault();
-        document.getElementById("textbox-codigo-agregar").value = '';
-        document.getElementById("popup_error").classList.remove('active');
-    }
-
     render() 
     {
-        const { isLoaded, infoPost, fila } = this.state;
+        const { isLoaded, fila } = this.state;
         if (!isLoaded) 
         {
             return(
@@ -379,17 +387,17 @@ class Agregar extends Component
                         <button className="btn-op-agregar" type="button" onClick={this.peticionPost_close}><i className="fas fa-box"></i></button>
                     </div>
                 </div>
-                <div className="popup" id="popup_error">
+                {/* <div className="popup" id="popup_error">
                     <i className="fas fa-exclamation-circle icono-error"></i><br/>
-                    <label className="titulo-error">{infoPost}</label><br/>
+                    <label className="titulo-error"></label><br/>
                     <button type="button" className="btn-error-popup" onClick={this.cerrar_popup_error}>Continuar</button>
-                </div>
-                <div className="popup" id="popup_success">
+                </div> */}
+                {/* <div className="popup" id="popup_success">
                     <i className="fas fa-check-circle icono-error"></i><br/>
-                    <label className="titulo-error">{infoPost}</label><br/>
-                </div>
+                    <label className="titulo-error"></label><br/>
+                </div> */}
                 </>
-            );            
+            );         
         }
     }   
 }

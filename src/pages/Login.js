@@ -3,7 +3,7 @@ import '../styles/style.css';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-const url = 'https://localhost:44347/api/pallets';
+const url = 'http://192.168.1.206/API-Argall/api/pallets';
 
 class Login extends Component
 {
@@ -16,7 +16,7 @@ class Login extends Component
             {
                 idusuario: '',
                 password: '',
-                puesto: '10'
+                puesto: '80'
             },
             nombre: '',
             error: ''
@@ -97,8 +97,8 @@ class Login extends Component
                     <input className="textbox-login" type="password" name="password" placeholder="Contraseña" onChange={this.handleChange}/><br/>
                     <label className="">Puesto:</label>
                     <select className="textbox-puesto" name="puesto" onChange={this.handleChange}>
-                        <option>10</option>
-                        <option>11</option>
+                        <option>80</option>
+                        <option>81</option>
                     </select><br/>
                     <label className="text-error-login">{error}</label>
                     <button className="btn-login" type="submit">Iniciar Sesión</button>

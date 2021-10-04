@@ -43,8 +43,9 @@ class Menu extends Component
             <div>
                 <nav className="nav-menu">
                     <button className="btn-cerrar_sesion" onClick={()=>this.cerrar_sesion()}><i className="btn-cerrar fas fa-times"></i></button>
-                    <label className="titulo">Menu</label> 
-                    <label className="titulo">Id: {cookies.get('IdSession')}</label>                   
+                    <div className="container-menu-titulo">
+                        <label className="titulo">Menu</label> 
+                    </div>
                 </nav>
                 <div className="container-menu">
                     <Link to="/agregar"><button className="btn-menu">
@@ -58,22 +59,14 @@ class Menu extends Component
                     </button>
                     </Link>
                     <Link to="/menu"><button className="btn-menu">
-                        <i className="iconos fas fa-trash-alt"></i><br/>
-                        <label className="titulo-btn">Eliminar</label>
+                    </button>
+                    </Link>
+                    <Link to="/menu"><button className="btn-menu"> 
                     </button>
                     </Link>
                     <Link to="/menu"><button className="btn-menu">
-                        <i className="iconos fas fa-pallet"></i><br/>
-                        <label className="titulo-btn">Agregar</label> 
-                    </button>
-                    </Link>
-                    <Link to="/menu"><button className="btn-menu">
-                        <i className="iconos fas fa-pallet"></i><br/>
-                        <label className="titulo-btn">Agregar</label> 
                     </button></Link>
                     <Link to="/menu"><button className="btn-menu">
-                        <i className="iconos fas fa-cog"></i><br/>
-                        <label className="titulo-btn">Config.</label> 
                     </button>
                     </Link>
                 </div>
