@@ -70,12 +70,17 @@
     height: 240px;
 }
 
-.container-btn
+.container-btn, .container-btn-pallets
 {
     display: flex;
     justify-content: space-between;
     margin: 0 10px;
     margin-top: 190px;
+}
+
+.container-btn-pallets
+{
+    margin-top: 0
 }
 
 .container-info-pallets

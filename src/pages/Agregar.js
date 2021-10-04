@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import Swal from 'sweetalert2'
 import Cookies from 'universal-cookie';
-import { Link } from 'react-router-dom';
+import Nav from '../components/Nav'
+import BtnVolver from '../components/BtnVolver'
 import '../styles/style.css';
 // import audioError from '../sounds/error.wav'; 
 // import audioCorrecto from '../sounds/correcto.wav'; 
+import url from '../services/Settings'
 
 const cookies = new Cookies();
-
-const url = 'http://192.168.1.206/API-Argall/api/pallets';
 
 class Agregar extends Component 
 {
@@ -350,11 +350,7 @@ class Agregar extends Component
         {
             return (
                 <>
-                <div>
-                    <nav className="nav-agregar">
-                        <label>Puesto: {cookies.get('Puesto')}</label><br/>
-                        <label>Movimiento: {cookies.get('User')}</label>
-                    </nav>
+                    <Nav/>
                     <div className="container-pallet">
                         {fila.map(datos => (
                             <label key="{data}" className="text-pallets-agregar">
@@ -365,7 +361,7 @@ class Agregar extends Component
                             <div className="container-texto">
                                 <label className="text-codigo-agregar">Codigo</label>
                             </div>
-                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" autocomplete="off" value={this.state.value}  onChange={this.handleChange}/>
+                            <input id="textbox-codigo-agregar" name="idbulto" className="textbox-agregar" type="text" autoComplete="off" value={this.state.value}  onChange={this.handleChange}/>
                             <div className="container-texto">
                                 {fila.map(datos => (
                                     <label key="{data}" className="text-pallets-agregar">{datos.articulo}</label>   
@@ -380,23 +376,9 @@ class Agregar extends Component
                         </div>
                     </div>
                     <div className="container-btn">
-                        <Link to="/menu">
-                            <button className="btn-op-agregar" type="button">
-                                <i className="fas fa-chevron-left"></i>
-                            </button>
-                        </Link>
+                        <BtnVolver/>
                         <button className="btn-op-agregar" type="button" onClick={this.peticionPost_close}><i className="fas fa-box"></i></button>
                     </div>
-                </div>
-                {/* <div className="popup" id="popup_error">
-                    <i className="fas fa-exclamation-circle icono-error"></i><br/>
-                    <label className="titulo-error"></label><br/>
-                    <button type="button" className="btn-error-popup" onClick={this.cerrar_popup_error}>Continuar</button>
-                </div> */}
-                {/* <div className="popup" id="popup_success">
-                    <i className="fas fa-check-circle icono-error"></i><br/>
-                    <label className="titulo-error"></label><br/>
-                </div> */}
                 </>
             );         
         }

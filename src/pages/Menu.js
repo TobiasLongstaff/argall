@@ -48,18 +48,23 @@ class Menu extends Component
                     </div>
                 </nav>
                 <div className="container-menu">
-                    <Link to="/agregar"><button className="btn-menu">
-                        <i className="iconos fas fa-pallet"></i><br/>
-                        <label className="titulo-btn">Agregar</label> 
-                    </button>
+                    <Link to="/agregar">
+                        <button className="btn-menu">
+                            <i className="iconos fas fa-pallet"></i><br/>
+                            <label className="titulo-btn">Agregar</label> 
+                        </button>
                     </Link>
-                    <Link to="/abrir-pallet"><button className="btn-menu">
-                        <i className="iconos fas fa-boxes"></i><br/>
-                        <label className="titulo-btn">Ver Pallets</label>
-                    </button>
+                    <Link to="/abrir-pallet">
+                        <button className="btn-menu">
+                            <i className="iconos fas fa-boxes"></i><br/>
+                            <label className="titulo-btn">Ver Pallets</label>
+                        </button>
                     </Link>
-                    <Link to="/menu"><button className="btn-menu">
-                    </button>
+                    <Link to="/camara">
+                        <button className="btn-menu">
+                            <i className="iconos fas fa-dolly"></i><br/>
+                            <label className="titulo-btn">Asignar Camara</label>
+                        </button>
                     </Link>
                     <Link to="/menu"><button className="btn-menu"> 
                     </button>

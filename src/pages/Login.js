@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import '../styles/style.css';
 import Cookies from 'universal-cookie';
+import url from '../services/Settings'
 
 const cookies = new Cookies();
-const url = 'http://192.168.1.206/API-Argall/api/pallets';
 
 class Login extends Component
 {

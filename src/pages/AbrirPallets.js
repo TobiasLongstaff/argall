@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
-import {Link} from 'react-router-dom';
+import BtnVolver from '../components/BtnVolver'
 import '../styles/style.css';
+import url from '../services/Settings'
 
 const cookies = new Cookies();
-
-const url = 'http://192.168.1.206/API-Argall/api/pallets';
 
 class AbrirPallets extends Component 
 {
@@ -88,11 +87,9 @@ class AbrirPallets extends Component
                         </a>
                     ))}
                     </div>
-                    <Link to="/menu">
-                        <button className="btn-op-ver-pallet" type="button">
-                            <i className="fas fa-chevron-left"></i>
-                        </button>
-                    </Link>
+                    <div className="container-btn-pallets">
+                        <BtnVolver color="white" font="var(--celeste)"/> 
+                    </div>
                 </div>
             );            
         }
