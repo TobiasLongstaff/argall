@@ -35,6 +35,16 @@
 
 /* CONTAINER */
 
+.container-selectlist
+{
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-top: .5rem;
+    width: 100%;
+}
+
 .container-menu-titulo
 {
     display: flex;
@@ -94,6 +104,11 @@
     margin: 7px 0;
 }
 
+.container-texto-pallets
+{
+    margin-top: 24px;
+}
+
 .container-text-eliminar
 {
     margin-top: 30px;
@@ -148,6 +163,7 @@
 {
     height: 280px;
     overflow: auto;
+    margin-bottom: 20px;
 }
 
 .container-n-caja
@@ -159,7 +175,7 @@
 
 /* TEXTBOX */
 
-.textbox-puesto
+.textbox-puesto, .textbox-camaras
 {
     font-size: 20px;
     margin-top: 15px;
@@ -170,6 +186,13 @@
     width: 60px;
     outline: none;
     margin-left: 5px;
+}
+
+.textbox-camaras
+{
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
 }
 
 .textbox-login
@@ -184,7 +207,7 @@
     outline: none;
 }
 
-.textbox-agregar
+.textbox-agregar, .textbox-pallets
 {
     border-radius: 5px;
     padding: 5px;
@@ -194,6 +217,11 @@
     color: #7A7A7A;
     text-align: center;
     outline: none;
+}
+
+.textbox-pallets
+{
+    margin: 15px 0;
 }
 
 .textbox-eliminar
@@ -480,6 +508,18 @@
 }
 
 /* OTROS */
+
+.input-icon 
+{
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    font-size: 24px;
+    line-height: 48px;
+    text-align: left;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
 
 .box-pallets-agregar
 {

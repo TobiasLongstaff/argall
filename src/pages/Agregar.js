@@ -168,14 +168,6 @@ class Agregar extends Component
         });
     }
 
-    // cerrar_popup_error=e=>
-    // {
-    //     e.preventDefault();
-    //     document.getElementById("textbox-codigo-agregar").value = '';
-    //     document.getElementById("popup_error").classList.remove('active');
-    //     document.getElementById("textbox-codigo-agregar").focus(); 
-    // }
-
     handleChange(e) 
     {               
         this.setState(

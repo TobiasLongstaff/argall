@@ -66,8 +66,11 @@ class Menu extends Component
                             <label className="titulo-btn">Asignar Camara</label>
                         </button>
                     </Link>
-                    <Link to="/menu"><button className="btn-menu"> 
-                    </button>
+                    <Link to="/eliminar">
+                        <button className="btn-menu"> 
+                            <i className="iconos fas fa-trash"></i><br/>
+                            <label className="titulo-btn">Eliminar</label>
+                        </button>
                     </Link>
                     <Link to="/menu"><button className="btn-menu">
                     </button></Link>

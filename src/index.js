@@ -4,10 +4,10 @@ import './styles/index.css';
 import Routes from './routes/Routes';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Routes />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Routes />
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // reportWebVitals();
