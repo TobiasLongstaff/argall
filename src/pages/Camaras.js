@@ -7,6 +7,8 @@ import url from '../services/Settings'
 import Cookies from 'universal-cookie' 
 import Loading from '../components/Loading'
 import ErrorApi from '../components/ErrorApi'
+import soundError from '../sounds/error.wav'; 
+import soundSuccess from '../sounds/success.wav'; 
 
 const color = "var(--verde)"
 const cookies = new Cookies();
@@ -23,6 +25,13 @@ const AsignarCamara = ({history}) =>
         {
             history.push('/')
         }
+        else
+        {
+            if(!loading)
+            {
+                textboxCodigoPallet.current.focus()
+            }
+        }        
     })
 
     const handleChange = e =>
@@ -53,6 +62,8 @@ const AsignarCamara = ({history}) =>
             }
             let res = await fetch(url, config)
             console.log(res.json())
+            const audio = new Audio(soundSuccess)
+            audio.play();
             Swal.fire(
             {
                 icon: 'success',
@@ -66,6 +77,8 @@ const AsignarCamara = ({history}) =>
         catch (error)
         {
             console.error(error)
+            const audio = new Audio(soundError)
+            audio.play();
             Swal.fire(
                 'Error',
                 error,

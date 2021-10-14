@@ -111,7 +111,7 @@
 
 .container-text-eliminar
 {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .container-carga
@@ -528,6 +528,13 @@
     position: absolute;
     left: 84px;
     top: 190px;
+}
+
+.box-pallets-eliminar
+{
+    font-size: 80px;
+    color: var(--rojo);
+    margin-bottom: 20px;
 }
 
 .box-ver-pallet

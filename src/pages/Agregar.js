@@ -4,8 +4,8 @@ import Cookies from 'universal-cookie';
 import Nav from '../components/Nav'
 import BtnVolver from '../components/BtnVolver'
 import '../styles/style.css';
-// import audioError from '../sounds/error.wav'; 
-// import audioCorrecto from '../sounds/correcto.wav'; 
+import soundError from '../sounds/error.wav'; 
+import soundSuccess from '../sounds/success.wav'; 
 import url from '../services/Settings'
 
 const cookies = new Cookies();
@@ -33,7 +33,8 @@ class Agregar extends Component
             error: null,
             isLoaded: false,
             fila:[],
-            pallet: ''
+            pallet: '',
+            play: false
         }
         this.handleChange = this.handleChange.bind(this);
     }   
@@ -185,14 +186,14 @@ class Agregar extends Component
             console.log(cant_caracters);
             if(cant_caracters >= 6)
             {
-                if(e.target.value.charAt(0) !== 'B')
-                {
-                    document.getElementById("textbox-codigo-agregar").value = '';
-                }
-                else
-                {
+                // if(e.target.value.charAt(0) !== 'B')
+                // {
+                //     document.getElementById("textbox-codigo-agregar").value = '';
+                // }
+                // else
+                // {
                     this.peticionPost_save();
-                }                
+                // }                
             }
         });
     }
@@ -249,6 +250,8 @@ class Agregar extends Component
             else
             {
                 this.obtener_caja(); 
+                this.audio = new Audio(soundSuccess)
+                this.audio.play();
                 Swal.fire(
                 {
                     icon: 'success',
@@ -260,6 +263,8 @@ class Agregar extends Component
         }
         else
         {
+            this.audio = new Audio(soundError)
+            this.audio.play();
             Swal.fire(
                 'Error',
                 observacion,
@@ -311,7 +316,9 @@ class Agregar extends Component
                         error
                     });
                 }
-
+                
+                this.audio = new Audio(soundSuccess)
+                this.audio.play();
                 Swal.fire(
                     '¡Pallet Cerrado!',
                     'El pallet fue cerrado correctamente.',
