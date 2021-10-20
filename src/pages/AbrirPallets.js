@@ -34,7 +34,7 @@ const AbrirPallets = (history) =>
             <Nav height="auto"/>
             <div className="container-palletes-ver-pallet">
                 {data.filter(puestos => puestos.puesto === cookies.get('Puesto')).map(datos => (
-                    <FilasPallets datos={datos} />
+                    <FilasPallets key={datos.pallet} datos={datos} />
                 ))}
             </div>
             <div className="container-btn-pallets">

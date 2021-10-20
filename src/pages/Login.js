@@ -1,111 +1,99 @@
-import React, { Component } from 'react';
-import '../styles/style.css';
-import Cookies from 'universal-cookie';
+import React, { useEffect, useState } from 'react'
+import '../styles/style.css'
+import Cookies from 'universal-cookie'
 import url from '../services/Settings'
+import useFetch from '../hooks/useFetch'
+import Loading from '../components/Loading'
+import ErrorApi from '../components/ErrorApi'
 
 const cookies = new Cookies();
 
-class Login extends Component
+const Login = ({history}) =>
 {
-    constructor(props)
-    {
-        super(props);
-        this.state = 
-        {
-            form:
-            {
-                idusuario: '',
-                password: '',
-                puesto: '80'
-            },
-            nombre: '',
-            error: ''
-        }    
-        this.handleChange = this.handleChange.bind(this);    
-    }
+    const {data, loading, error} = useFetch(url+'/puesto/PAL') 
+    const [ MensajeError, setError ] = useState(null)
+    const [form, setForm] = useState({idusuario: '', password: '', puesto: '80'})
 
-    handleSubmit = async e =>
-    {
-        e.preventDefault();
-        let config = 
-        {
-            method: 'POST',
-            headers: 
-            {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.state.form)
-        }
-        let res = await fetch(url, config)
-        let infoPost = await res.json();
-        let nombre = infoPost.nombre;
-        this.setState(
-        {
-            nombre: nombre
-        });
-        console.log(infoPost)
-
-        if(nombre != null )
-        {
-            cookies.set('IdSession', '1', {path: '/'});
-            cookies.set('User', this.state.nombre, {path: '/'});
-            cookies.set('Puesto', this.state.form.puesto, {path: '/'});
-            window.location.href='./menu';            
-        }
-        else
-        {
-            let error = 'Usuario o Contraseña Incorrecto';
-            this.setState(
-            {
-                error: error
-            });
-        }
-    }
-
-    handleChange(e)
-    {
-        this.setState(
-        {
-            form:
-            {
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            },
-        }, () =>
-        {
-            console.log(this.state.form);
-        });
-    }
-
-    componentDidMount()
+    useEffect (() => 
     {
         if(cookies.get('IdSession'))
         {
-            window.location.href='./menu';
+            history.push('/menu')
         }
+    })
+
+    const handleSubmit = async e =>
+    {
+        e.preventDefault();
+        try
+        {
+            let config = 
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form)
+            }
+            let res = await fetch(url, config)
+            let infoPost = await res.json()
+            let nombre = infoPost.nombre
+            console.log(infoPost)     
+            if(nombre != null )
+            {
+                cookies.set('IdSession', '1', {path: '/'});
+                cookies.set('User', nombre, {path: '/'});
+                cookies.set('Puesto', form.puesto, {path: '/'});
+                history.push('/menu')            
+            }
+            else
+            {
+                let error = 'Usuario o Contraseña Incorrecto';
+                setError(error);
+            }       
+        }
+        catch(error)
+        {
+            setError(error);
+        }
+
     }
 
-    render()
+    const handleChange = e =>
     {
-        const { error } = this.state;
-        return(
-            <div className="container-principal">
-                <form onSubmit={this.handleSubmit}>
-                    <label className="titulo">Login</label><br/>
-                    <input className="textbox-login" type="text" name="idusuario" placeholder="Usuario" onChange={this.handleChange} /><br/>
-                    <input className="textbox-login" type="password" name="password" placeholder="Contraseña" onChange={this.handleChange}/><br/>
-                    <label className="">Puesto:</label>
-                    <select className="textbox-puesto" name="puesto" onChange={this.handleChange}>
-                        <option>80</option>
-                        <option>81</option>
-                    </select><br/>
-                    <label className="text-error-login">{error}</label>
-                    <button className="btn-login" type="submit">Iniciar Sesión</button>
-                </form>
-            </div>
-        );
+        setForm(
+        {
+            ...form,
+            [e.target.name]: e.target.value
+        })
+        console.log(form)
     }
+
+    if(loading)
+        return <Loading />
+            
+    if(error)
+        return <ErrorApi />
+
+    return(
+        <div className="container-principal">
+            <form onSubmit={handleSubmit}>
+                <label className="titulo">Login</label><br/>
+                <input className="textbox-login" type="text" name="idusuario" placeholder="Usuario" onChange={handleChange} /><br/>
+                <input className="textbox-login" type="password" name="password" placeholder="Contraseña" onChange={handleChange}/><br/>
+                <label className="">Puesto:</label>
+                <select className="textbox-puesto" name="puesto" onChange={handleChange}>
+                    {data.map(datos => (
+                        <option key={datos.puestosNombre}> {datos.idpuesto}</option>
+                    ))}
+                </select><br/>
+                <label className="text-error-login">{MensajeError}</label>
+                <button className="btn-login" type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+    );
 }
 
 export default Login;

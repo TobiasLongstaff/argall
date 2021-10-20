@@ -15,7 +15,7 @@ const cookies = new Cookies();
 
 const AsignarCamara = ({history}) =>
 {
-    const {data, loading, error} = useFetch(url+'/1') 
+    const {data, loading, error} = useFetch(url+'/camaras') 
     const [form, setForm ] = useState({idpallet: '', idcamara: '1', movimiento: cookies.get('User')})
     const textboxCodigoPallet = React.createRef()
 

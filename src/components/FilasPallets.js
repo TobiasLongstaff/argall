@@ -11,9 +11,8 @@ const FilasPallets = ({datos}) =>
     }
     else
     {
-        console.log('xd')
         return(
-            <Link to={"agregar/"+datos.pallet} key={datos.pallet} className="container-pallet-abierto">
+            <Link to={"agregar/"+datos.pallet} className="container-pallet-abierto">
                 <label className="text-pallets-agregar">{datos.pallet}</label>
                 <label className="text-pallets-agregar">{datos.articulo}</label>
                 <div className="container-n-caja">
@@ -22,7 +21,7 @@ const FilasPallets = ({datos}) =>
                         <label className="text-n-cajas-ver-pallet">{datos.caja}</label>                            
                     </div>                            
                 </div>  
-            </Link>     
+            </Link>
         )
     }
 }
