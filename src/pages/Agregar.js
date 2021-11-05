@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Swal from 'sweetalert2'
-import Cookies from 'universal-cookie';
+import Cookies from 'universal-cookie'
 import Nav from '../components/Nav'
 import BtnVolver from '../components/BtnVolver'
-import '../styles/style.css';
-import soundError from '../sounds/error.wav'; 
-import soundSuccess from '../sounds/success.wav'; 
+import '../styles/style.css'
+import soundError from '../sounds/error.wav' 
+import soundSuccess from '../sounds/success.wav'
 import url from '../services/Settings'
 
 const cookies = new Cookies();
@@ -250,8 +250,8 @@ class Agregar extends Component
             else
             {
                 this.obtener_caja(); 
-                this.audio = new Audio(soundSuccess)
-                this.audio.play();
+                this.audio2 = new Audio(soundSuccess)
+                this.audio2.play();
                 Swal.fire(
                 {
                     icon: 'success',
@@ -317,8 +317,8 @@ class Agregar extends Component
                     });
                 }
                 
-                this.audio = new Audio(soundSuccess)
-                this.audio.play();
+                this.audio2 = new Audio(soundSuccess)
+                this.audio2.play();
                 Swal.fire(
                     '¡Pallet Cerrado!',
                     'El pallet fue cerrado correctamente.',
